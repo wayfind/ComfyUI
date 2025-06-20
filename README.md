@@ -394,6 +394,10 @@ If you need to use the legacy frontend for any reason, you can access it using t
 
 This will use a snapshot of the legacy frontend preserved in the [ComfyUI Legacy Frontend repository](https://github.com/Comfy-Org/ComfyUI_legacy_frontend).
 
+## xDit Integration
+
+ComfyUI includes experimental support for the [xDit project](https://github.com/xdit-project/xDiT) to enable multi-GPU inference acceleration via TACO-DiT. Install the `xdit` Python package and use the `TACODiTRun` node to leverage this capability. You can disable the integration with the `--disable-xdit` command line argument.
+
 # QA
 
 ### Which GPU should I buy for this?
