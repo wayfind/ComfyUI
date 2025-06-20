@@ -260,6 +260,15 @@ else:
     except:
         XFORMERS_IS_AVAILABLE = False
 
+XDIT_AVAILABLE = False
+if not args.disable_xdit:
+    try:
+        import xdit
+        XDIT_AVAILABLE = True
+        logging.info("xDit detected: multi-GPU acceleration enabled")
+    except Exception:
+        logging.warning("xDit not installed, multi-GPU acceleration disabled")
+
 def is_nvidia():
     global cpu_state
     if cpu_state == CPUState.GPU:
@@ -1038,6 +1047,10 @@ def xformers_enabled_vae():
         return False
 
     return XFORMERS_ENABLED_VAE
+
+def xdit_available():
+    """Return True if the xDit library is available and not disabled."""
+    return XDIT_AVAILABLE
 
 def pytorch_attention_enabled():
     global ENABLE_PYTORCH_ATTENTION

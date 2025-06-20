@@ -113,6 +113,7 @@ attn_group.add_argument("--use-sage-attention", action="store_true", help="Use s
 attn_group.add_argument("--use-flash-attention", action="store_true", help="Use FlashAttention.")
 
 parser.add_argument("--disable-xformers", action="store_true", help="Disable xformers.")
+parser.add_argument("--disable-xdit", action="store_true", help="Disable xDit multi-GPU acceleration.")
 
 upcast = parser.add_mutually_exclusive_group()
 upcast.add_argument("--force-upcast-attention", action="store_true", help="Force enable attention upcasting, please report if it fixes black images.")
