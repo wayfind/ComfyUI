@@ -1934,6 +1934,30 @@ class ImagePadForOutpaint:
         return (new_image, mask.unsqueeze(0))
 
 
+class TACODiTRun:
+    """Run inference using xDit's TACO-DiT engine."""
+
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "model": ("MODEL",),
+                "samples": ("LATENT",),
+            }
+        }
+
+    RETURN_TYPES = ("LATENT",)
+    FUNCTION = "run"
+
+    CATEGORY = "advanced/experimental"
+
+    def run(self, model, samples):
+        from comfy.xdit_integration import TACODiTWrapper
+
+        engine = TACODiTWrapper(model)
+        return (engine.execute(samples),)
+
+
 NODE_CLASS_MAPPINGS = {
     "KSampler": KSampler,
     "CheckpointLoaderSimple": CheckpointLoaderSimple,
@@ -1959,6 +1983,7 @@ NODE_CLASS_MAPPINGS = {
     "ImageBatch": ImageBatch,
     "ImagePadForOutpaint": ImagePadForOutpaint,
     "EmptyImage": EmptyImage,
+    "TACODiTRun": TACODiTRun,
     "ConditioningAverage": ConditioningAverage ,
     "ConditioningCombine": ConditioningCombine,
     "ConditioningConcat": ConditioningConcat,
@@ -2042,6 +2067,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "LatentFlip": "Flip Latent",
     "LatentCrop": "Crop Latent",
     "EmptyLatentImage": "Empty Latent Image",
+    "TACODiTRun": "Run with TACO-DiT",
     "LatentUpscale": "Upscale Latent",
     "LatentUpscaleBy": "Upscale Latent By",
     "LatentComposite": "Latent Composite",
